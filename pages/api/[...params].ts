@@ -32,23 +32,46 @@ export default async function handler(
     return res.status(400).json({ message: `No function name provided. ${usage}` });
   }
 
+  //todo: recurse
+  const parsedArgs = args.map(arg => {
+    try {
+      if (arg.startsWith('[')) {
+        const vals = arg.replaceAll('[', '').replaceAll(']', '').split(',');
+        return vals.map(val => String(val))
+      }
+    } catch (e) {
+      return arg;
+    }
+  })
+
   const abi = await getAbi(address);
   const contract = new ethers.Contract(address, abi, provider);
 
   if (!contract[fn]) {
-    return res.status(400).json({ message: `${fn} isn't a valid function on ${address}` });
+    return res.status(400).json({ message: `${fn} isn't a function on ${address}` });
   }
 
-  const val = args ? await contract[fn](...args) : await contract[fn]();
+  try {
+    const val = parsedArgs ? await contract[fn](...parsedArgs) : await contract[fn]();
+    return res.status(200).json({ result: parse(val) })
+  } catch (e: any) {
+    return res.status(400).json({ message: `${e.reason}` });
+  }
+}
 
-  let output = {};
-  if (isBigNumber(val)) {
-    output = ethers.BigNumber.from(val).toString();
+const parse = (val: any): any => {
+  if (Array.isArray(val)) {
+    return val.map(v => parse(v));
+  } else if (val.constructor === Object) {
+    return Object.keys(val).reduce((acc: any, key: string) => {
+      acc[key] = parse(val[key]);
+      return acc;
+    }, {})
+  } else if (isBigNumber(val)) {
+    return ethers.BigNumber.from(val).toString();
   } else {
-    output = val;
+    return val;
   }
-
-  return res.status(200).json({ result: output })
 }
 
 async function getAbi(address: string) {

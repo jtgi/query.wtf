@@ -1,12 +1,19 @@
-import { NextPageContext } from 'next'
 import Head from 'next/head'
+import { useEffect, useState } from 'react';
 import { useQuery } from '../hooks';
+import { ClipboardIcon } from '@heroicons/react/20/solid'
+
 
 export default function Query() {
   const { isLoading, error, data } = useQuery(async () => {
-    const rsp = await fetch('/api/q' + window.location.pathname)
+    const rsp = await fetch('/api' + window.location.pathname)
     const json = await rsp.json();
-    return rsp.ok ? json.result : json.message;
+
+    if (!rsp.ok) {
+      throw new Error(json.message);
+    } else {
+      return json.result;
+    }
   })
 
   return (
@@ -17,12 +24,68 @@ export default function Query() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="md:absolute md:left-1/2 md:-translate-x-1/2 md:w-3/5 max-w-[800px] md:mt-8 md:rounded-md sm:m-2 bg-white p-6">
-        {isLoading && <svg className="animate-spin h-10 w-10 text-black" viewBox="0 0 24 24" />}
-        {error && <div>Error: {error.message}</div>}
-        {data && <div className='break-words font-mono'>{data}</div>}
+      <main className="bg-gray-700 text-slate-200 md:absolute md:left-1/2 md:-translate-x-1/2 md:w-3/5 max-w-[800px] md:mt-8 rounded-md m-4 p-6 drop-shadow-2xl">
+        {data && (<button
+          type="button"
+          onClick={() => {
+            navigator.clipboard.writeText(renderData(data));
+          }}
+          className="absolute right-5 inline-flex items-center rounded-md border border-transparent bg-slate-600 px-3 py-1 text-xs font-medium leading-4 text-white shadow-sm hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2"
+        >
+          Copy
+        </button>)}
+        <h1 className="font-semibold font-mono text-orange-400">&gt; query.wtf</h1>
+        {isLoading && <div><Loader /></div>}
+        {error && <div className='text-red-400 font-semibold'>{error.message}</div>}
+        {data && <div className='break-words font-mono'>{renderData(data)}</div>}
       </main>
     </div>
   )
 }
 
+function renderData(data?: any): string {
+  if (!data) {
+    return " ";
+  } else if (typeof data === 'string') {
+    return data;
+  } else if (Array.isArray(data) && data.length === 0) {
+    return '[]';
+  } else {
+    return JSON.stringify(data, null, 2);
+  }
+}
+
+function Loader({ text = "_" }) {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const ref = setInterval(() => {
+      setShow(!show);
+    }, 100)
+
+    return () => clearInterval(ref);
+  }, [text, show]);
+
+  return (
+    <span style={{ visibility: show ? 'visible' : 'hidden' }}>{text}</span>
+  )
+}
+
+
+function Ticker({ text }: { text: string }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const ref = setInterval(() => {
+      setIndex((index + 1) % text.length);
+    }, 50)
+
+    return () => clearInterval(ref);
+  }, [index, text]);
+
+  const chars = text.substring(0, index) + '*' + text.substring(index);
+
+  return (
+    <span>{chars}</span>
+  )
+}
