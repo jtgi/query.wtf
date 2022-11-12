@@ -38,6 +38,8 @@ export default async function handler(
       if (arg.startsWith('[')) {
         const vals = arg.replaceAll('[', '').replaceAll(']', '').split(',');
         return vals.map(val => String(val))
+      } else {
+        return arg;
       }
     } catch (e) {
       return arg;
@@ -53,8 +55,16 @@ export default async function handler(
 
   try {
     const val = parsedArgs ? await contract[fn](...parsedArgs) : await contract[fn]();
-    return res.status(200).json({ result: parse(val) })
+    return res.status(200).json({
+      query: {
+        contractAddress: address,
+        function: fn,
+        args: parsedArgs
+      },
+      result: parse(val)
+    })
   } catch (e: any) {
+    console.log(e);
     return res.status(400).json({ message: `${e.reason}` });
   }
 }
@@ -68,6 +78,7 @@ const parse = (val: any): any => {
       return acc;
     }, {})
   } else if (isBigNumber(val)) {
+    console.log(val);
     return ethers.BigNumber.from(val).toString();
   } else {
     return val;
