@@ -1,6 +1,4 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { LinkIcon } from '@heroicons/react/20/solid'
 
 const samples = [
   {
@@ -13,7 +11,7 @@ const samples = [
   },
   {
     title: 'Get total UNI supply',
-    href: 'https://www.query.wtf/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/totalSupply'
+    href: 'https://query.wtf/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/totalSupply'
   }
 ]
 
@@ -32,7 +30,7 @@ export default function Home() {
         {samples.map(sample => (
           <a key={sample.href} target="_blank" href={sample.href} className="bg-gray-200 rounded-md p-6 drop-shadow-md border border-gray-400 hover:border-gray-600 hover:cursor-pointer block break-words transition-all hover:scale-102" rel="noreferrer">
             <p className="font-semibold font-mono">{sample.title}</p>
-            <p className="italic opacity-70">{sample.href.replace("https://", "")}</p>
+            <p className="italic opacity-70"><LinkIcon className="w-4 inline" /> {sample.href.replace("https://", "")}</p>
           </a>
         ))}
       </div>
