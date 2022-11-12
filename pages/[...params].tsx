@@ -18,7 +18,7 @@ export default function Query() {
       </Head>
 
       <main className="md:absolute md:left-1/2 md:-translate-x-1/2 md:w-3/5 max-w-[800px] md:mt-8 md:rounded-md sm:m-2 bg-white p-6">
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <svg className="animate-spin h-10 w-10 text-black" viewBox="0 0 24 24" />}
         {error && <div>Error: {error.message}</div>}
         {data && <div className='break-words font-mono'>{data}</div>}
       </main>
