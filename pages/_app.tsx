@@ -29,6 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta name="twitter:title" content={pageProps.title || defaults.title} />
       <meta name="twitter:description" content={pageProps.description || defaults.description} />
       <meta name="twitter:card" content="summary_large_image" />
+
+      <link rel="icon" href="/favicon.ico" />
     </Head>
     <Component {...pageProps} />
     <footer className='h-[150px] block text-slate-700 text-xs text-center pt-8 mt-8 mb-8'>

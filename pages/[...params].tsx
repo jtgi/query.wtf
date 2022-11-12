@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { useQuery } from '../hooks';
-import { ClipboardIcon } from '@heroicons/react/20/solid'
-
 
 export default function Query() {
   const { isLoading, error, data } = useQuery(async () => {
@@ -18,10 +16,6 @@ export default function Query() {
 
   return (
     <div >
-      <Head>
-        <title>query.wtf</title>
-      </Head>
-
       <div className="bg-gray-800 text-slate-200 m-5 md:mx-auto sm:m-5 md:w-3/5 md:max-w-[800px] rounded-md p-6 drop-shadow-lg min-h-[200px] border border-gray-800">
         <div className='flex justify-between mb-2'>
           {data && (<Copy text="Copy" />)}
