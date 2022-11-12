@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div>
       <Component {...pageProps} />
     </div>
-    <footer className='h-[150px] block text-slate-500 text-xs text-center pt-8 mt-8 mb-8'>
+    <footer className='h-[150px] block text-slate-700 text-xs text-center pt-8 mt-8 mb-8'>
       <div className="mx-auto text-center">
         <div><a href="https://twitter.com/jtgi" target={"_blank"} rel="noreferrer"><Image width={40} height={40} className="inline mx-auto animate-bounce rounded-full border border-gray-100 shadow-sm shadow-md" src="/jtgi.jpeg" alt={''} /></a></div>
         <a className="uppercase text-[10px]" href='https://twitter.com/jtgi' target={"_blank"} rel="noreferrer"> made by jtgi</a>
