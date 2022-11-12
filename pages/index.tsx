@@ -4,16 +4,16 @@ import styles from '../styles/Home.module.css'
 
 const samples = [
   {
-    title: 'Get tokenURI for Cryptoadz token 1',
+    title: 'Get token uri for Cryptoadz token 1',
     href: 'https://query.wtf/0x1cb1a5e65610aeff2551a50f76a87a7d3fb649c6/tokenURI/1'
   },
   {
-    title: 'Get balanceOf Let\'s Walk for an address',
+    title: 'Get balance of Let\'s Walk for an address',
     href: 'https://query.wtf/0x0825f050e9b021a0e9de8cb1fb10b6c9f41e834c/balanceOf/0x704CF202792341d79A9Fd6DD97046aa7eF3F4319'
   },
   {
-    title: 'Get total USDC supply',
-    href: 'https://query.wtf/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48/totalSupply'
+    title: 'Get total UNI supply',
+    href: 'https://www.query.wtf/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984/totalSupply'
   }
 ]
 
@@ -28,8 +28,8 @@ export default function Home() {
       <div className="bg-gray-800 text-slate-200 m-5 md:mx-auto sm:m-5 md:w-3/5 md:max-w-[800px] rounded-md p-6 drop-shadow-lg border border-gray-800">
         <h1 className="font-semibold font-mono text-orange-400">&gt; query.wtf</h1>
         <h2 className="font-semibold font-mono">query ethereum from the url bar</h2>
-        <p className="opacity-50">browser – {`query.wtf/$contract/$function/$arg1/$arg2/...`}</p>
-        <p className="opacity-50">api – {`query.wtf/api/$contract/$function/$arg1/$arg2/...`}</p>
+        <p className="opacity-50">browser – {`query.wtf/:contract/:function/:arg1/:arg2/...`}</p>
+        <p className="opacity-50">api – {`query.wtf/api/:contract/:function/:arg1/:arg2/...`}</p>
 
       </div>
 
