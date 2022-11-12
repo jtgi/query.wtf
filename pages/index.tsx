@@ -8,8 +8,8 @@ const samples = [
     href: 'https://query.wtf/0x1cb1a5e65610aeff2551a50f76a87a7d3fb649c6/tokenURI/1'
   },
   {
-    title: 'Get balance of Let\'s Walk for an address',
-    href: 'https://query.wtf/0x0825f050e9b021a0e9de8cb1fb10b6c9f41e834c/balanceOf/0x704CF202792341d79A9Fd6DD97046aa7eF3F4319'
+    title: 'Get svg for Terraform token',
+    href: 'https://query.wtf/0x4e1f41613c9084fdb9e34e11fae9412427480e56/tokenSVG/1'
   },
   {
     title: 'Get total UNI supply',
