@@ -55,6 +55,8 @@ export default async function handler(
 
   try {
     const val = parsedArgs ? await contract[fn](...parsedArgs) : await contract[fn]();
+
+    res.setHeader('Cache-Control', 's-maxage=300');
     return res.status(200).json({
       query: {
         contractAddress: address,
