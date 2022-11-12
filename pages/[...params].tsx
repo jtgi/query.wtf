@@ -28,7 +28,7 @@ export default function Query() {
         <h1 className="font-semibold font-mono text-orange-400">&gt; query.wtf</h1>
         </div>
         {isLoading && <div><Loader /></div>}
-        {error && <div className='text-red-400 font-semibold'>{error.message}</div>}
+        {error && <div className='text-red-400 font-semibold break-words'>{error.message}</div>}
         {data && <div className='break-words font-mono'>{renderData(data)}</div>}
       </div>
     </div>
