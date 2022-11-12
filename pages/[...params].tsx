@@ -18,7 +18,7 @@ export default function Query() {
     <div >
       <div className="bg-gray-800 text-slate-200 m-5 md:mx-auto sm:m-5 md:w-3/5 md:max-w-[800px] rounded-md p-6 drop-shadow-lg min-h-[200px] border border-gray-800">
         <div className='flex justify-between mb-2'>
-          {data && (<Copy text="Copy" />)}
+          {data && (<Copy text={renderData(data)} />)}
         <h1 className="font-semibold font-mono text-orange-400">&gt; query.wtf</h1>
         </div>
         {isLoading && <div><Loader /></div>}
@@ -74,7 +74,7 @@ function Copy({ text }: { text: string }) {
     onClick={onCopy}
     className="absolute right-5 inline-flex items-center rounded-md border border-transparent bg-slate-600 px-3 py-1 text-xs font-medium leading-4 text-slate-400 shadow-sm hover:bg-slate-500 focus:outline-none focus:ring-slate-500 focus:ring-offset-2 top-5"
   >
-    {copied ? ' Copied ' : text}
+    {copied ? ' Copied ' : 'Copy'}
   </button>
 }
 
