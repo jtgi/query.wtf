@@ -66,7 +66,6 @@ export default async function handler(
       result: parse(val)
     })
   } catch (e: any) {
-    console.log(e);
     return res.status(400).json({ message: `${e.reason}` });
   }
 }
@@ -102,11 +101,5 @@ async function getAbi(address: string) {
 }
 
 function isBigNumber(val: any): val is ethers.BigNumber {
-  try {
-    ethers.BigNumber.from(val);
-  } catch (e) {
-    return false;
-  }
-
-  return true;
+  return val?._isBigNumber || false;
 }
