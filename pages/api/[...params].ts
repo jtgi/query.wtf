@@ -79,7 +79,6 @@ const parse = (val: any): any => {
       return acc;
     }, {})
   } else if (isBigNumber(val)) {
-    console.log(val);
     return ethers.BigNumber.from(val).toString();
   } else {
     return val;
