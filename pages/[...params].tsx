@@ -15,16 +15,14 @@ export default function Query() {
   })
 
   return (
-    <div >
-      <div className="bg-gray-800 text-slate-200 m-5 md:mx-auto sm:m-5 md:w-3/5 md:max-w-[800px] rounded-md p-6 drop-shadow-lg min-h-[200px] border border-gray-800">
-        <div className='flex justify-between mb-2'>
-          {data && (<Copy text={renderData(data)} />)}
+    <div className="bg-gray-800 text-slate-200 m-5 md:mx-auto sm:m-5 md:w-3/5 md:max-w-[800px] rounded-md p-6 drop-shadow-lg min-h-[200px] border border-gray-800 relative">
+      <div className='flex justify-between mb-2'>
+        {data && (<Copy text={renderData(data)} />)}
         <h1 className="font-semibold font-mono text-orange-400">&gt; query.wtf</h1>
-        </div>
-        {isLoading && <div><Loader /></div>}
-        {error && <div className='text-red-400 font-semibold break-words'>{error.message}</div>}
-        {data && <div className='break-words font-mono'>{renderData(data)}</div>}
       </div>
+      {isLoading && <div><Loader /></div>}
+      {error && <div className='text-red-400 font-semibold break-words'>{error.message}</div>}
+      {data && <div className='break-words font-mono'>{renderData(data)}</div>}
     </div>
   )
 }
